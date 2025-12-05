@@ -15,7 +15,7 @@ services:
       - DB_NAME=playground
     depends_on:
       - db
-    command: sh -c "npx sequelize-cli db:migrate --config config/config.cjs && npm run build && npm start"
+    command: sh -c "until nc -z db 3306; do echo 'Waiting for db'; sleep 1; done; npx sequelize-cli db:migrate --config config/config.cjs && npm run build && npm start"
   db:
     image: mysql:8.4
     restart: always
@@ -27,5 +27,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   db_data:

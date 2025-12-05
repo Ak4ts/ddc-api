@@ -13,6 +13,11 @@ const sequelize = new Sequelize(
   },
 );
 
+import { initModels } from "./models";
+
+// Initialize models with the Sequelize instance to avoid circular imports
+initModels(sequelize);
+
 export { sequelize };
 export * from "./models";
 export * from "./repositories";

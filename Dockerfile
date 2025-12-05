@@ -6,7 +6,10 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY certs ./certs
-RUN npm install
+RUN apt-get update \
+	&& apt-get install -y netcat-openbsd \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& npm install
 
 COPY ./src ./src
 
