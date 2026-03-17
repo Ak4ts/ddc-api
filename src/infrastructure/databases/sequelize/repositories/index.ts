@@ -1,3 +1,2 @@
-import { TestRepositoryImpl } from "./test-repository";
-
-export { TestRepositoryImpl };
+export * from "./stock-repository";
+export * from "./test-repository";

@@ -1,3 +1,2 @@
-import { TestController } from "./test-controller";
-
-export { TestController };
+export * from "./stocks/stock";
+export * from "./test-controller";

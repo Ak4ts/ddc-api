@@ -1,3 +1,2 @@
-import { Test } from "@domain/models/test-model";
-
-export { Test };
+export * from "./stock-model";
+export * from "./test-model";
